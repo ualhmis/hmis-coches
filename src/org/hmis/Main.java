@@ -14,7 +14,7 @@ public class Main {
     	
     	// Imprimir los objetos del arreglo
         for (Coche coche : coches) {
-            System.out.println(coche.getMarca() + " " + coche.getModelo() + " " + coche.getAño() + " $" + coche.getPrecio());
+            System.out.println(coche);
         }
     }
 }

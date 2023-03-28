@@ -1,5 +1,7 @@
 package org.hmis;
 
+import java.util.Objects;
+
 public class Coche {
     private String marca;
     private String modelo;
@@ -52,5 +54,28 @@ public class Coche {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Coche other = (Coche) obj;
+		return año == other.año && Objects.equals(marca, other.marca) && Objects.equals(modelo, other.modelo)
+				&& precio == other.precio;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Coche [marca=" + marca + ", modelo=" + modelo + ", año=" + año + ", precio=" + precio + "]";
+	}
+	
+	
     
 }
