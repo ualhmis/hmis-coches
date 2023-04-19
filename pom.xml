@@ -45,6 +45,55 @@
 					<argLine>-Dfile.encoding=UTF-8</argLine>
 				</configuration>
 			</plugin>
+			<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-surefire-plugin</artifactId>
+		<version>3.0.0</version>
+			</plugin>
+			<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-surefire-plugin</artifactId>
+		<version>3.0.0</version>
+		<configuration>
+            <includes>
+                <include>Sample.java</include>
+            </includes>
+		</configuration>
+			</plugin>
+			<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-surefire-plugin</artifactId>
+		<version>3.0.0</version>
+		<configuration>
+            <excludes>
+              <exclude>**/TestCircle.java</exclude>
+              <exclude>**/TestSquare.java</exclude>
+            </excludes>
+          </configuration>
+			</plugin>
+			<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-surefire-plugin</artifactId>
+		<version>3.0.0</version>
+		<dependencies>
+			<dependency>
+				<groupId>me.fabriciorby</groupId>
+				<artifactId>maven-surefire-junit5-tree-reporter</artifactId>
+				<version>0.1.0</version>
+			</dependency>
+		</dependencies>
+		<configuration>
+			<reportFormat>plain</reportFormat>
+			<consoleOutputReporter>
+				<disable>true</disable>
+			</consoleOutputReporter>
+			<statelessTestsetInfoReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter" />
+			<argLine>@{argLine} -Dfile.encoding=UTF-8</argLine>
+			<!-- -Dfile.encoding=UTF-8 necesario para que pasen los tests con UTF-8 -->
+			<!-- @{argLine} necesario para Jacoco !!! -->
+		</configuration>
+			</plugin>
+			
 		</plugins>
 	</build>
 	<dependencies>

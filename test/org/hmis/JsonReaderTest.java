@@ -24,5 +24,18 @@ class JsonReaderTest {
 		assertTrue (coches[0].equals(primero));
 	}
 
+	@Test
+	void testObjectNotNull() {
+		JsonReader jsonReader = new JsonReader();
+
+		assertNotEquals(jsonReader, null);
+	}
+
+	@Test
+	void testExcepcionLeerCochesJSON() {
+		String rutaMala = "data/mma106.json";
+
+		assertDoesNotThrow(() -> JsonReader.leerCochesJSON(rutaMala));
+	}
 
 }
