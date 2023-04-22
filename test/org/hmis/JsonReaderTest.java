@@ -1,7 +1,6 @@
 package org.hmis;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +12,7 @@ class JsonReaderTest {
     @Test
     public void testConstructorVacio() {
         JsonReader objeto = new JsonReader();
-        assertNotNull(objeto);
+        Assertions.assertNotNull(objeto);
     }
 
     @ParameterizedTest
@@ -22,9 +21,9 @@ class JsonReaderTest {
         String ruta = "data/coches.json";
         Coche primero = new Coche(marca, modelo, anio, precio);
         Coche[] coches = JsonReader.leerCochesJSON(ruta);
-        assertEquals(primero, coches[index]);
-        assertTrue(primero.equals(coches[index]));
-        assertTrue(coches[index].equals(primero));
+        Assertions.assertEquals(primero, coches[index]);
+        Assertions.assertTrue(primero.equals(coches[index]));
+        Assertions.assertTrue(coches[index].equals(primero));
     }
 
     @ParameterizedTest
@@ -33,6 +32,6 @@ class JsonReaderTest {
     public void leerCochesJSON_catchTest(String archivo) {
         // Intentamos leer un archivo que no existe
         Coche[] coches = JsonReader.leerCochesJSON(archivo);
-        assertNull(coches); // El resultado debería ser null debido a la excepción lanzada en el catch
+        Assertions.assertNull(coches); // El resultado debería ser null debido a la excepción lanzada en el catch
     }
 }

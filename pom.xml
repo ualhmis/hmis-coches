@@ -1,5 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>hmis-coches</groupId>
 	<artifactId>hmis-coches</artifactId>
@@ -42,23 +43,27 @@
 					<consoleOutputReporter>
 						<disable>true</disable>
 					</consoleOutputReporter>
-					<statelessTestsetInfoReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter" />
-					<argLine>@{argLine} -Dfile.encoding=UTF-8</argLine>
-					<!-- -Dfile.encoding=UTF-8 necesario para que pasen los tests con UTF-8 -->		
-					<!-- @{argLine} necesario para Jacoco !!! -->		
+					<statelessTestsetInfoReporter
+						implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter" />
+					<!-- <argLine>@{argLine} -Dfile.encoding=UTF-8</argLine> -->
+					<!-- -Dfile.encoding=UTF-8 necesario para que pasen los tests con UTF-8 -->
+					<!-- @{argLine} necesario para Jacoco !!! -->
 				</configuration>
 			</plugin>
 
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.6</version>
+				<version>0.8.8</version>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
+						<configuration>
+							<dataFile>${project.build.directory}/jacoco.ex</dataFile>
+						</configuration>
 					</execution>
 					<!-- attached to Maven test phase -->
 					<execution>
@@ -67,6 +72,9 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
+						<configuration>
+							<dataFile>${project.build.directory}/jacoco.ex</dataFile>
+						</configuration>
 					</execution>
 					<!-- Add this checking: coverage >= 90% -->
 					<execution>
@@ -75,6 +83,7 @@
 							<goal>check</goal>
 						</goals>
 						<configuration>
+							<dataFile>${project.build.directory}/jacoco.ex</dataFile>
 							<rules>
 								<rule>
 									<element>PACKAGE</element>
@@ -82,7 +91,7 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.3</minimum>
+											<minimum>0.9</minimum>
 										</limit>
 									</limits>
 								</rule>
@@ -91,9 +100,112 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>4.0.0-M7</version>
+				<configuration>
+					<locales>es,en</locales>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.5.0</version>
+				<configuration>
+					<!-- <reportOutputDirectory> ${project.reporting.outputDirectory}/../../docs 
+						</reportOutputDirectory> -->
+					<doclet>nl.talsmasoftware.umldoclet.UMLDoclet</doclet>
+					<docletArtifact>
+						<groupId>nl.talsmasoftware</groupId>
+						<artifactId>umldoclet</artifactId>
+						<version>2.1.0</version>
+					</docletArtifact>
+					<additionalOptions>
+						<!-- -umlImageFormat (svg | svg_img | png | eps | none) -->
+						<!-- <additionalOption>-umlImageFormat svg_img,png</additionalOption> -->
+						<additionalOption>-umlImageFormat svg_img</additionalOption>
+						<additionalOption>-private</additionalOption>
+						<!-- <additionalOption>-createPumlFiles</additionalOption> -->
+						<additionalOption>-umlExcludedTypeReferences</additionalOption> <!-- añade metodos toString() y equals() -->
+						<!-- <additionalOption>-umlJavaBeanPropertiesAsFields</additionalOption> -->
+						<!-- <additionalOption>-umlCustomDirective "skinparam classBackgroundColor 
+							LightYellow"</additionalOption> -->
+					</additionalOptions>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>8.2.1</version>
+				<configuration>
+					<skipTestScope>false</skipTestScope>
+					<formats>
+						<format>HTML</format>
+						<format>XML</format>
+					</formats>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>4.0.0-M7</version>
+				<configuration>
+					<locales>es,en</locales>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.1.1</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>3.3.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.20.0</version>
+				<configuration>
+					<linkXref>true</linkXref>
+					<sourceEncoding>utf-8</sourceEncoding>
+					<minimumTokens>100</minimumTokens>
+					<targetJdk>1.8</targetJdk>
+					<skipEmptyReport>false</skipEmptyReport>
+					<rulesets>
+						<ruleset>/rulesets/java/braces.xml</ruleset>
+						<ruleset>/rulesets/java/naming.xml</ruleset>
+					</rulesets>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/nl.talsmasoftware/umldoclet -->
+		<dependency>
+			<groupId>nl.talsmasoftware</groupId>
+			<artifactId>umldoclet</artifactId>
+			<version>2.1.0</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -111,6 +223,31 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>5.9.2</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>5.9.2</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Examples of vulnerable dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.15.0</version>
 		</dependency>
 	</dependencies>
 </project>
