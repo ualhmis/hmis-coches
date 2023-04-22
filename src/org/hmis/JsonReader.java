@@ -2,12 +2,17 @@ package org.hmis;
 
 import java.io.FileReader;
 
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class JsonReader {
+	
+	public JsonReader() {
+		
+	}
 
 	public static Coche[] leerCochesJSON (String archivo) {
 

@@ -1,15 +1,26 @@
 package org.hmis;
 
 public class Main {
-    public static void main(String[] args) {
-    	String ruta = "data/coches.json";
-    	
-    	Coche[] coches = JsonReader.leerCochesJSON(ruta);
-    	
-    	// Imprimir los objetos del arreglo
-        for (Coche coche : coches) {
-            System.out.println(coche);
-        }
-    }
-}
 
+	private static String ruta = "data/coches.json";
+	private static Coche[] coches = JsonReader.leerCochesJSON(ruta);
+
+	public static String getRuta() {
+		return ruta;
+	}
+
+	public static Coche[] getCoches() {
+		return coches;
+	};
+
+	public String toString() {
+		String cadena = "";
+
+		for (Coche coche : coches) {
+			cadena += coche + "\n";
+		}
+
+		return cadena;
+	}
+
+}
