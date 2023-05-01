@@ -8,12 +8,27 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+/**
+ * JsonReader
+ * 
+ * @author jimlu
+ *
+ */
 public class JsonReader {
 	
+	/**
+	 * JsonReader
+	 */
 	public JsonReader() {
 		
 	}
 
+	/**
+	 * leerCochesJson
+	 * 
+	 * @param archivo
+	 * @return
+	 */
 	public static Coche[] leerCochesJSON (String archivo) {
 
 		Coche[] coches = null;
