@@ -9,20 +9,38 @@ class JsonReaderTest {
 
 	@Test
 	void testLeerCochesJSON() {
-		String ruta = "data/coches.json";
-		Coche [] coches = JsonReader.leerCochesJSON(ruta);
+		String filepath = "data/coches.json";
+		Coche [] coches = JsonReader.leerCochesJSON(filepath);
 		assertEquals (4, coches.length);
 	}
 
 	@Test
 	void testLeerCochesJSONprimero() {
-		String ruta = "data/coches.json";
-		Coche primero = new Coche ("Toyota", "Corolla", 2022, 22000);
-		Coche [] coches = JsonReader.leerCochesJSON(ruta);
-		assertEquals(primero, coches[0]);
-		assertTrue (primero.equals(coches[0]));
-		assertTrue (coches[0].equals(primero));
+		String filepath = "data/coches.json";
+		Coche primero = new Coche ("Chevrolet", "Camaro", 2023, 52000);
+		Coche [] coches = JsonReader.leerCochesJSON(filepath);
+		assertEquals(primero, coches[2]);
+		assertTrue (primero.equals(coches[2]));
+		assertTrue (coches[2].equals(primero));
 	}
 
+	@Test
+	void testError() {
+		String filepath = "data/coches.json";
+		Coche primero = new Coche ("Chevrolet", "Camaro", 2023, 52000);
+		Coche [] coches = JsonReader.leerCochesJSON(filepath);
 
+	}
+
+	@Test
+	void testExcepcionLeerArchivo() {
+		String filepath = "data/excepcion.json";
+		assertDoesNotThrow(() -> JsonReader.leerCochesJSON(filepath));
+	}
+
+	@Test
+	void testObjectoNoNull() {
+		JsonReader jsonReader = new JsonReader();
+		assertNotEquals(jsonReader, null);
+	}
 }
