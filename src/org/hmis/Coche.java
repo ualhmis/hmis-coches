@@ -65,8 +65,10 @@ public class Coche {
 		if (getClass() != obj.getClass())
 			return false;
 		Coche other = (Coche) obj;
-		return año == other.año && Objects.equals(marca, other.marca) && Objects.equals(modelo, other.modelo)
-				&& precio == other.precio;
+		return año == other.año && 
+				Objects.equals(marca, other.marca) && 
+				Objects.equals(modelo, other.modelo) && 
+				precio == other.precio;
 	}
 
 
