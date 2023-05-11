@@ -10,7 +10,7 @@ public class Ejercicio2 {
 		// comprobar que la longitud sea < 30
 		// llamar al método de la bbdd
 		
-		if(username!=null && password !=null && 
+		if(!username.equals("") && !password.equals("") && 
 		   username.toString().length()<30&&password.toString().length()<30 &&
 		   tieneMinusculaMayusculaYNumero(password)==true) {
 			
