@@ -143,6 +143,14 @@ class CocheTest {
 	}
 	
 	@Test
+	void testHashCode() {
+
+		Coche coche = new Coche();
+
+		assertEquals((Object)coche.hashCode(), coche.hashCode());
+	}
+	
+	@Test
 	void testTostring() {
 	
 		Coche primero = new Coche ("Ferrari", "Corolla", 2022, 22000);

@@ -72,6 +72,10 @@ public class Coche {
 				precio == other.precio;
 	}
 
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 
 	@Override
