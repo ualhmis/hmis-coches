@@ -21,6 +21,7 @@ public class Coche {
 		this.precio = precio;
 	}
 
+    
 
 	// Getters y setters
     public String getMarca() {
@@ -65,10 +66,16 @@ public class Coche {
 		if (getClass() != obj.getClass())
 			return false;
 		Coche other = (Coche) obj;
-		return año == other.año && Objects.equals(marca, other.marca) && Objects.equals(modelo, other.modelo)
-				&& precio == other.precio;
+		return año == other.año && 
+				Objects.equals(marca, other.marca) && 
+				Objects.equals(modelo, other.modelo) && 
+				precio == other.precio;
 	}
 
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 
 	@Override

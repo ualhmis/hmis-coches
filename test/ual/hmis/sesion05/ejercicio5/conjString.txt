@@ -1,0 +1,5 @@
+"coche, moto; avión, coche, tren, barco, moto; avión, coche, tren, barco, moto"
+"casa, edificio; casa, apartamento, chalet, piso, villa; casa, apartamento, chalet, piso, villa"
+"perro, gato, conejo, hámster; perro, gato, loro, hámster; perro, gato, loro, conejo, hámster"
+"montaña, playa; ciudad, montaña, parque, río, playa; ciudad, montaña, parque, río, playa"
+"fútbol, baloncesto; fútbol, tenis, natación, baloncesto, vóley; fútbol, tenis, natación, baloncesto, vóley"
