@@ -21,8 +21,8 @@
 			</resource>
 		</resources>
 		<plugins>
+			<!-- Compilador de maven -->
 			<plugin>
-				<!-- Compilador de maven -->
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
@@ -96,7 +96,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.9.1</version>
+				<version>4.0.0-M7</version>
 				<configuration>
 					<locales>es,en</locales>
 				</configuration>
@@ -105,7 +105,34 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.5.0</version>
+				<configuration>
+					<!-- <reportOutputDirectory>
+					${project.reporting.outputDirectory}/../../docs
+					</reportOutputDirectory> -->
+					<doclet>nl.talsmasoftware.umldoclet.UMLDoclet</doclet>
+					<docletArtifact>
+						<groupId>nl.talsmasoftware</groupId>
+						<artifactId>umldoclet</artifactId>
+						<version>2.1.0</version>
+					</docletArtifact>
+					<additionalOptions>
+						<!-- -umlImageFormat (svg | svg_img | png | eps | none) -->
+						<!-- <additionalOption>-umlImageFormat
+						svg_img,png</additionalOption> -->
+						<additionalOption>-umlImageFormat svg_img</additionalOption>
+						<additionalOption>-private</additionalOption>
+						<!--
+						<additionalOption>-createPumlFiles</additionalOption> -->
+						<additionalOption>-umlExcludedTypeReferences</additionalOption> <!--
+						añade metodos toString() y equals() -->
+						<!--
+						<additionalOption>-umlJavaBeanPropertiesAsFields</additionalOption> -->
+						<!-- <additionalOption>-umlCustomDirective "skinparam
+						classBackgroundColor
+                    LightYellow"</additionalOption> -->
+					</additionalOptions>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -151,7 +178,7 @@
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>
 				<artifactId>spotbugs-maven-plugin</artifactId>
-				<version>4.2.3</version>
+				<version>4.7.3.4</version>
 				<configuration>
 					<effort>Max</effort>
 					<threshold>Low</threshold>
@@ -164,7 +191,7 @@
 						<plugin>
 							<groupId>com.h3xstream.findsecbugs</groupId>
 							<artifactId>findsecbugs-plugin</artifactId>
-							<version>1.10.1</version>
+							<version>1.12.0</version>
 						</plugin>
 					</plugins>
 				</configuration>
@@ -188,6 +215,15 @@
 						</reports>
 					</reportSet>
 				</reportSets>
+			</plugin>
+			<!--Plugin de site-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>4.0.0-M7</version>
+				<configuration>
+					<locales>es,en</locales>
+				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>
@@ -249,6 +285,14 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
 			<version>4.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/nl.talsmasoftware/umldoclet -->
+		<dependency>
+			<groupId>nl.talsmasoftware</groupId>
+			<artifactId>umldoclet</artifactId>
+			<version>2.1.0</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!--
