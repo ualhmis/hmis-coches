@@ -1,0 +1,6 @@
+marca1, modelo1, año1, precio1, marca2, modelo2, año2, precio2, expected
+Renault, Clio, 2001, 12000, Renault, Clio, 2001, 12000, true
+Renault, Clio, 2001, 12000, Seat, Clio, 2001, 12000, false
+Renault, Clio, 2001, 12000, Renault, Twingo, 2001, 12000, false
+Renault, Clio, 2001, 12000, Renault, Clio, 2003, 12000, false
+Renault, Clio, 2001, 12000, Renault, Clio, 2001, 22000, false

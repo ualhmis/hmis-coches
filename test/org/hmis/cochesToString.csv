@@ -1,0 +1,3 @@
+marca, modelo, año, precio, expected ToString 
+Renault, Clio, 2001, 12000, "Coche [marca=Renault, modelo=Clio, año=2001, precio=12000]"
+Seat, Ibiza, 2004, 17000, "Coche [marca=Seat, modelo=Ibiza, año=2004, precio=17000]"
